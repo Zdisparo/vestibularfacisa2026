@@ -208,7 +208,7 @@
       transform:translateZ(0);
     }
     .hero-progress.is-anim > i{
-      animation: heroProg 3s linear infinite;
+      animation: heroProg 5s linear infinite;
     }
     @keyframes heroProg{
       from{width:0%}
@@ -825,7 +825,7 @@
       heroTimer = setInterval(()=>{
         if(Date.now() < heroPauseUntil) return;
         goHero(heroIndex + 1);
-      }, 3000);
+      }, 5000);
     }
 
     function stopHeroAuto(){
@@ -1229,3 +1229,4 @@
 
 </body>
 </html>
+
