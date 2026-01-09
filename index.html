@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+
+  // ✅ Pixel ID
+  fbq('init', '731985879919035');
+
+  // ✅ Gate 30 dias via localStorage (PageView + Lead)
+  (function(){
+    const TTL_DAYS = 30;
+    const TTL_MS = TTL_DAYS * 24 * 60 * 60 * 1000;
+
+    function canFire(key){
+      try{
+        const raw = localStorage.getItem(key);
+        if(!raw) return true;
+        const last = parseInt(raw, 10);
+        if(!last || Number.isNaN(last)) return true;
+        return (Date.now() - last) > TTL_MS;
+      }catch(e){
+        return true;
+      }
+    }
+    function mark(key){
+      try{ localStorage.setItem(key, String(Date.now())); }catch(e){}
+    }
+
+    window.__facisaPxGate = { canFire, mark, TTL_DAYS };
+
+    const PV_KEY = "facisa_px_pageview_v1";
+    if (canFire(PV_KEY)) {
+      fbq('track', 'PageView');
+      mark(PV_KEY);
+    }
+  })();
+</script>
+
+<noscript>
+  <img height="1" width="1" style="display:none"
+       src="https://www.facebook.com/tr?id=731985879919035&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>FACISA | Vestibular 2026</title>
+  <meta name="theme-color" content="#0050dd">
+  <style>
+    :root{
+      --blue:#e6f2ff;
+      /* ✅ trocando o vermelho por azul 0050dd */
+      --red:#0050dd;
+      --red-dark:#003aa6;
+      --white:#ffffff;
+      --text:#101114;
+      --muted:#6b7280;
+      --radius:18px;
+      --shadow:0 8px 28px rgba(16,17,20,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--blue);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+
+    .container{max-width:720px;margin:0 auto;padding:16px}
+    .card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    .topbar{position:sticky;top:0;z-index:30;background:var(--white);border-bottom:1px solid #eef2f4}
+    .topbar-inner{display:flex;align-items:center;gap:12px;padding:10px 14px}
+    .logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--red),#5a8dff)}
+    .logo img{width:100%;height:100%;object-fit:contain;display:block}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .badge{margin-left:auto;font-size:12px;background:var(--red);color:var(--white);padding:6px 10px;border-radius:999px}
+
+    .hero{background:linear-gradient(180deg, var(--white), var(--blue));}
+    .hero-box{padding:24px 16px 12px}
+    .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--red);text-transform:uppercase;background:#e8f1ff;padding:6px 10px;border-radius:999px}
+    .h1{font-size:28px;line-height:1.15;margin:12px 0 8px;font-weight:900;}
+    .h1 .accent{color:var(--red)}
+    .sub{color:#243141;opacity:.9;margin-bottom:16px}
+    .cta-row{display:flex;gap:10px}
+    .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;padding:14px 16px;border-radius:14px;font-weight:800;border:0}
+    .btn-primary{background:var(--red);color:var(--white)}
+    .btn-primary:active{transform:translateY(1px);background:var(--red-dark)}
+    .btn-outline{background:transparent;color:var(--red);border:2px solid var(--red)}
+
+    section{padding:16px}
+    .section-title{font-size:18px;font-weight:900;margin:0 0 10px}
+    .section-desc{color:var(--muted);font-size:14px;margin-top:-4px}
+
+    .grid-3{display:grid;grid-template-columns:1fr;gap:12px}
+    .highlight{padding:14px;border-radius:16px;background:var(--white);display:flex;gap:12px;align-items:center}
+    .ico{width:44px;height:44px;border-radius:12px;background:var(--blue);display:grid;place-items:center;font-weight:900;color:var(--red)}
+    .h-text b{display:block}
+
+    .carousel-wrap{position:relative}
+    .carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}
+    .carousel::-webkit-scrollbar{height:6px}
+    .carousel::-webkit-scrollbar-thumb{background:#d2d8de;border-radius:999px}
+    .course{min-width:72%;scroll-snap-align:center;border-radius:18px;overflow:hidden;background:var(--white);box-shadow:var(--shadow)}
+    .course .media{aspect-ratio:16/10;background:#dbeafe;display:grid;place-items:center;font-weight:800;color:#0f172a;position:relative}
+    .course .media img{width:100%;height:100%;object-fit:cover}
+    .course .body{padding:12px}
+    .course .title{font-size:16px;font-weight:900;margin:0 0 6px}
+    .course .meta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2f7;font-size:12px}
+    .cta-mini{margin-top:10px;display:block;text-align:center;padding:10px;border-radius:12px;background:var(--red);color:var(--white);font-weight:800}
+    .nav-btn{position:absolute;top:38%;transform:translateY(-50%);border:0;background:rgba(16,17,20,.5);color:#fff;width:36px;height:36px;border-radius:999px;display:grid;place-items:center}
+    .nav-btn.left{left:4px}
+    .nav-btn.right{right:4px}
+
+    .steps{display:grid;grid-template-columns:1fr;gap:10px}
+    .step{background:var(--white);padding:14px;border-radius:16px}
+    .step b{display:block}
+
+    details{background:var(--white);padding:14px;border-radius:16px}
+    details+details{margin-top:10px}
+    summary{font-weight:800;cursor:pointer}
+    summary::-webkit-details-marker{display:none}
+
+    footer{background:var(--red);color:#fff;padding:18px;border-top-left-radius:18px;border-top-right-radius:18px}
+    .footer-brand{font-weight:900}
+
+    .sticky-cta{position:fixed;bottom:10px;left:10px;right:10px;z-index:40}
+    .sticky-cta a{display:block;text-align:center;padding:14px;border-radius:16px;background:var(--red);color:#fff;font-weight:900;box-shadow:var(--shadow)}
+
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    .mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-20{margin-top:20px}
+    .bg-white{background:var(--white)}
+    .invert-text{color:#fff}
+    .center{text-align:center}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* ==============================
+       🖼️ HERO SLIDER + INDICADORES
+       ============================== */
+    .hero-slider{position:relative;border-radius:14px;overflow:hidden}
+    .hero-track{display:flex;gap:0;overflow:hidden;scroll-behavior:smooth}
+    .hero-slide{min-width:100%;aspect-ratio:16/9;background:#f2f6ff}
+    .hero-slide img{width:100%;height:100%;object-fit:cover}
+
+    /* setas */
+    .hero-nav{
+      position:absolute;inset:auto 8px 10px;
+      display:flex;gap:8px;justify-content:flex-end;z-index:2
+    }
+    .hero-btn{
+      border:0;border-radius:12px;padding:8px 12px;
+      font-weight:900;background:rgba(16,17,20,.55);
+      color:#fff;cursor:pointer;
+      backdrop-filter: blur(6px);
+    }
+    .hero-btn:active{transform:translateY(1px)}
+
+    /* dots */
+    .hero-dots{
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      display:flex;
+      gap:6px;
+      align-items:center;
+      z-index:2;
+      padding:6px 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(238,242,244,.9);
+      backdrop-filter: blur(8px);
+    }
+    .hero-dot{
+      width:8px;height:8px;border-radius:999px;border:0;
+      background:rgba(0,0,0,.18);
+      cursor:pointer;
+      padding:0;
+    }
+    .hero-dot.is-active{
+      width:18px;
+      background:var(--red);
+    }
+
+    /* progress bar (visual de "passando") */
+    .hero-progress{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:3px;
+      background:rgba(0,0,0,.06);
+      z-index:1;
+      overflow:hidden;
+    }
+    .hero-progress > i{
+      display:block;
+      height:100%;
+      width:0%;
+      background:var(--red);
+      transform:translateZ(0);
+    }
+    .hero-progress.is-anim > i{
+      animation: heroProg 3s linear infinite;
+    }
+    @keyframes heroProg{
+      from{width:0%}
+      to{width:100%}
+    }
+
+    /* ==============================
+       MODAL LEAD
+       ============================== */
+    .lead-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(16,17,20,.45);
+      display:none;
+      place-items:center;
+      z-index:9998;
+      padding:14px;
+    }
+    .lead-overlay.show{ display:grid; }
+
+    .lead-modal{
+      width:min(92vw, 520px);
+      background:var(--white);
+      border-radius:var(--radius);
+      box-shadow:0 18px 60px rgba(16,17,20,.22);
+      padding:16px;
+      position:relative;
+      transform:translateY(10px);
+      animation:leadPop .18s ease-out forwards;
+    }
+    @keyframes leadPop{ to{ transform:translateY(0); } }
+
+    .lead-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      border:1px solid #eef2f4;
+      background:#fff;
+      font-size:22px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .lead-title{ margin:6px 0 4px; font-size:18px; font-weight:900; }
+    .lead-sub{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.4;
+    }
+
+    .lead-form{ display:grid; gap:8px; }
+    .lead-label{ font-size:12px; font-weight:800; color:#243141; margin-top:6px; }
+    .lead-input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      outline:none;
+      background:#fff;
+      font-size:14px;
+    }
+    .lead-input:focus{
+      border-color:rgba(0,80,221,.45);
+      box-shadow:0 0 0 4px rgba(0,80,221,.10);
+    }
+
+    .lead-submit{
+      margin-top:8px;
+      padding:14px 16px;
+      border:0;
+      border-radius:14px;
+      background:var(--red);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .lead-submit:active{ transform:translateY(1px); background:var(--red-dark); }
+
+    .lead-note{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+      margin-top:2px;
+    }
+
+    @media (min-width:768px){
+      .course{min-width:56%}
+    }
+
+    /* ==============================
+       🎧 MINI PODCAST PLAYER (FACISA)
+       ============================== */
+    .pod-player{
+      position:fixed;
+      left:12px;
+      bottom:74px;
+      z-index:60;
+      width:min(94vw, 420px);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      background:rgba(255,255,255,.92);
+      border:1px solid #eef2f4;
+      border-radius:16px;
+      box-shadow:0 14px 40px rgba(16,17,20,.18);
+      padding:10px 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .pod-btn{
+      width:42px;height:42px;
+      border:0;
+      border-radius:14px;
+      background:var(--red);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .pod-btn:active{ transform:translateY(1px); background:var(--red-dark); }
+
+    .pod-mid{ flex:1; min-width:0; }
+    .pod-title{
+      font-size:12px;
+      font-weight:900;
+      line-height:1.1;
+      color:#111827;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      margin-bottom:6px;
+    }
+
+    .pod-progress{
+      display:grid;
+      grid-template-columns:44px 1fr 44px;
+      align-items:center;
+      gap:8px;
+    }
+
+    .pod-time{
+      font-size:11px;
+      color:var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pod-range{
+      width:100%;
+      accent-color: var(--red);
+      height:18px;
+    }
+
+    .pod-vol{
+      width:84px;
+      accent-color: var(--red);
+      height:18px;
+    }
+
+    .pod-x{
+      width:34px;height:34px;
+      border-radius:12px;
+      border:1px solid #eef2f4;
+      background:#fff;
+      font-size:18px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .pod-player.is-hidden{ display:none; }
+
+    @media (max-width:420px){
+      .pod-vol{ display:none; }
+      .pod-player{ bottom:82px; }
+    }
+
+    /* ==============================
+       🍪 COOKIE MODAL
+       ============================== */
+    .cookie-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(16,17,20,.38);
+      display:grid;
+      place-items:center;
+      z-index:9999;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .35s ease;
+    }
+    .cookie-overlay.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .cookie-modal{
+      width:min(92vw, 560px);
+      background:var(--white, #fff);
+      color:var(--text, #101114);
+      border-radius:var(--radius, 18px);
+      box-shadow:0 16px 48px rgba(16,17,20,.20);
+      padding:18px;
+      transform:translateY(12px);
+      transition:transform .35s ease;
+    }
+    .cookie-overlay.show .cookie-modal{ transform:translateY(0) }
+
+    .cookie-modal h3{
+      margin:0 0 6px;
+      font-size:18px;
+      font-weight:900;
+    }
+    .cookie-desc{
+      margin:0 0 14px;
+      color:var(--muted, #6b7280);
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .cookie-actions{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+    .cookie-btn{
+      background:var(--red);
+      color:#fff;
+      border:0;
+      border-radius:12px;
+      padding:10px 16px;
+      font-weight:900;
+      cursor:pointer;
+      transition:background .25s ease, transform .05s ease;
+    }
+    .cookie-btn:active{ transform:translateY(1px) }
+    .cookie-btn:hover{ background:var(--red-dark) }
+
+    @media (max-width:480px){
+      .cookie-actions{ justify-content:stretch }
+      .cookie-btn{ width:100% }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <img src="./logo.png" alt="FACISA">
+      </div>
+      <div>
+        <div class="brand">FACISA • Vestibular 2026</div>
+        <small style="color:var(--muted)">Itamaraju — Bahia</small>
+      </div>
+      <span class="badge">Inscrições Abertas</span>
+    </div>
+  </header>
+
+  <section class="hero reveal">
+    <div class="container hero-box card" style="background:linear-gradient(180deg,#fff,#f7fbff)">
+      <span class="eyebrow">Vestibular 2026</span>
+      <h1 class="h1">Seu futuro começa <span class="accent">agora</span> na FACISA</h1>
+      <p class="sub">Provas presenciais. Bolsas de estudo. Parcelamento facilitado.</p>
+      <div class="cta-row">
+        <a href="#cursos" class="btn btn-primary">Escolher curso</a>
+        <a href="#inscricao" class="btn btn-outline">Fazer inscrição</a>
+      </div>
+
+      <div class="mt-12 hero-slider" aria-label="Galeria de banners">
+        <div class="hero-track" id="heroTrack" aria-live="polite">
+          <div class="hero-slide"><img src="./bn-1.png" alt="Banner Vestibular 2026 - 1"></div>
+          <div class="hero-slide"><img src="./bn-2.jpg" alt="Banner Vestibular 2026 - 2"></div>
+          <div class="hero-slide"><img src="./bn-3.jpg" alt="Banner Vestibular 2026 - 3"></div>
+          <div class="hero-slide"><img src="./bn-4.jpg" alt="Banner Vestibular 2026 - 4"></div>
+          <div class="hero-slide"><img src="./bn-5.png" alt="Banner Vestibular 2026 - 5"></div>
+          <div class="hero-slide"><img src="./bn-6.png" alt="Banner Vestibular 2026 - 6"></div>
+        </div>
+
+        <!-- ✅ indicadores -->
+        <div class="hero-dots" id="heroDots" aria-label="Indicadores do slider"></div>
+
+        <!-- ✅ progress bar -->
+        <div class="hero-progress is-anim" id="heroProg" aria-hidden="true"><i></i></div>
+
+        <!-- setas (já existiam) -->
+        <div class="hero-nav">
+          <button class="hero-btn" type="button" aria-label="Banner anterior" onclick="scrollHero(-1)">‹</button>
+          <button class="hero-btn" type="button" aria-label="Próximo banner" onclick="scrollHero(1)">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <h2 class="section-title">Por que escolher a FACISA?</h2>
+      <p class="section-desc">Qualidade, estrutura moderna e conexão com o mercado — tudo em Itamaraju.</p>
+      <div class="grid-3">
+        <div class="highlight">
+          <div class="ico">A+</div>
+          <div class="h-text"><b>Excelência acadêmica</b><small class="section-desc">Corpo docente experiente e nota de destaque.</small></div>
+        </div>
+        <div class="highlight">
+          <div class="ico">🏥</div>
+          <div class="h-text"><b>Clínicas e laboratórios</b><small class="section-desc">Estrutura prática de ponta para várias áreas.</small></div>
+        </div>
+        <div class="highlight">
+          <div class="ico">💼</div>
+          <div class="h-text"><b>Empregabilidade</b><small class="section-desc">Parcerias locais e regionais que abrem portas.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="card" style="overflow:hidden">
+        <img src="./campus.png" alt="Foto do campus" />
+        <div style="padding:14px">
+          <h3 style="margin:0 0 6px;font-size:18px;font-weight:900">Aprender na prática faz diferença</h3>
+          <p class="section-desc">Na FACISA, o aluno aprende fazendo. Laboratórios equipados, aulas práticas e experiências que conectam a sala de aula ao mercado de trabalho.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cursos" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Cursos disponíveis</h2>
+      <p class="section-desc">Deslize para o lado e toque no curso para se inscrever.</p>
+
+      <div class="carousel-wrap">
+        <button class="nav-btn left" aria-label="Anterior" onclick="scrollCourses(-1)">‹</button>
+        <div class="carousel" id="carousel">
+
+          <a class="course" href="https://cesesb.com/projetos/concurso/inscricao/index.php?&tid=0&lid=0&pid=17&cd_area=&cd_concurso=123&cd_tipo=4" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="./odonto.png" alt="Curso de Odontologia" loading="lazy">
+              <span class="sr-only">Odontologia</span>
+            </div>
+            <div class="body">
+              <h3 class="title">Odontologia</h3>
+              <div class="meta"><span class="pill">Presencial</span><span class="pill">5 anos</span></div>
+              <span class="cta-mini">Inscrever-se</span>
+            </div>
+          </a>
+
+          <a class="course" href="https://cesesb.com/projetos/concurso/inscricao/index.php?&tid=0&lid=0&pid=17&cd_area=&cd_concurso=118&cd_tipo=4" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="./direito.png" alt="Curso de Direito" loading="lazy">
+              <span class="sr-only">Direito</span>
+            </div>
+            <div class="body">
+              <h3 class="title">Direito</h3>
+              <div class="meta"><span class="pill">Presencial</span><span class="pill">5 anos</span></div>
+              <span class="cta-mini">Inscrever-se</span>
+            </div>
+          </a>
+
+          <a class="course" href="https://cesesb.com/projetos/concurso/inscricao/index.php?&tid=0&lid=0&pid=17&cd_area=&cd_concurso=119&cd_tipo=4" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="./enfermagem.png" alt="Curso de Enfermagem" loading="lazy">
+              <span class="sr-only">Enfermagem</span>
+            </div>
+            <div class="body">
+              <h3 class="title">Enfermagem</h3>
+              <div class="meta"><span class="pill">Presencial</span><span class="pill">5 anos</span></div>
+              <span class="cta-mini">Inscrever-se</span>
+            </div>
+          </a>
+
+          <a class="course" href="https://cesesb.com/projetos/concurso/inscricao/index.php?&tid=0&lid=0&pid=17&cd_area=&cd_concurso=120&cd_tipo=4" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="./farmacia.png" alt="Curso de Farmácia" loading="lazy">
+              <span class="sr-only">Farmácia</span>
+            </div>
+            <div class="body">
+              <h3 class="title">Farmácia</h3>
+              <div class="meta"><span class="pill">Presencial</span><span class="pill">5 anos</span></div>
+              <span class="cta-mini">Inscrever-se</span>
+            </div>
+          </a>
+
+          <a class="course" href="https://cesesb.com/projetos/concurso/inscricao/index.php?&tid=0&lid=0&pid=17&cd_area=&cd_concurso=117&cd_tipo=4" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="./adm.png" alt="Curso de Administração" loading="lazy">
+              <span class="sr-only">Administração</span>
+            </div>
+            <div class="body">
+              <h3 class="title">Administração</h3>
+              <div class="meta"><span class="pill">Presencial</span><span class="pill">4 anos</span></div>
+              <span class="cta-mini">Inscrever-se</span>
+            </div>
+          </a>
+
+          <a class="course" href="https://cesesb.com/projetos/concurso/inscricao/index.php?&tid=0&lid=0&pid=17&cd_area=&cd_concurso=122&cd_tipo=4" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="./medvet.png" alt="Curso de Medicina Veterinária" loading="lazy">
+              <span class="sr-only">Medicina Veterinária</span>
+            </div>
+            <div class="body">
+              <h3 class="title">Medicina Veterinária</h3>
+              <div class="meta"><span class="pill">Presencial</span><span class="pill">5 anos</span></div>
+              <span class="cta-mini">Inscrever-se</span>
+            </div>
+          </a>
+
+          <a class="course" href="https://cesesb.com/projetos/concurso/inscricao/index.php?&tid=0&lid=0&pid=17&cd_area=&cd_concurso=121&cd_tipo=4" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="./gastro.png" alt="Curso de Gastronomia" loading="lazy">
+              <span class="sr-only">Gastronomia</span>
+            </div>
+            <div class="body">
+              <h3 class="title">Gastronomia</h3>
+              <div class="meta"><span class="pill">Presencial</span><span class="pill">4 anos</span></div>
+              <span class="cta-mini">Inscrever-se</span>
+            </div>
+          </a>
+
+          <a class="course" href="https://cesesb.com/projetos/concurso/inscricao/index.php?&tid=0&lid=0&pid=17&cd_area=&cd_concurso=124&cd_tipo=4" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="./radio.png" alt="Curso de Radiologia" loading="lazy">
+              <span class="sr-only">Radiologia</span>
+            </div>
+            <div class="body">
+              <h3 class="title">Radiologia</h3>
+              <div class="meta"><span class="pill">Presencial</span><span class="pill">3 anos</span></div>
+              <span class="cta-mini">Inscrever-se</span>
+            </div>
+          </a>
+
+        </div>
+        <button class="nav-btn right" aria-label="Próximo" onclick="scrollCourses(1)">›</button>
+      </div>
+      <small class="section-desc">Dica: você pode deslizar com o dedo para navegar.</small>
+    </div>
+  </section>
+
+  <section id="inscricao" class="reveal">
+    <div class="container">
+      <div class="step card">
+        <b>1) Inscreva-se</b>
+        <small class="section-desc">Preencha seus dados e escolha o curso.</small>
+      </div>
+      <div class="step card">
+        <b>2) Faça a prova</b>
+        <small class="section-desc">Online ou presencial, você decide.</small>
+      </div>
+      <div class="step card">
+        <b>3) Matrícula</b>
+        <small class="section-desc">Viva a melhor experiência acadêmica.</small>
+      </div>
+      <a href="#" class="btn btn-primary mt-16" style="display:block;text-align:center">Começar minha inscrição</a>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <h2 class="section-title">Dúvidas frequentes</h2>
+      <details>
+        <summary>▼ Como funciona o processo de matrícula?</summary>
+        <p class="section-desc">Após a aprovação, o candidato receberá as orientações para envio de documentos e efetivação da matrícula dentro do prazo estabelecido.</p>
+      </details>
+      <details>
+        <summary>▼ O diploma é reconhecido pelo MEC?</summary>
+        <p class="section-desc">Sim. Os cursos seguem as normas e autorizações do MEC, garantindo validade nacional do diploma.</p>
+      </details>
+      <details>
+        <summary>▼ Posso tirar dúvidas durante o processo de inscrição?</summary>
+        <p class="section-desc">Claro. A equipe da FACISA está disponível para auxiliar em todas as etapas do processo seletivo.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="reveal invert-text">
+    <div class="container">
+      <div class="footer-brand">FACISA • Vestibular 2026</div>
+      <small>Endereço, telefone, WhatsApp e links úteis entram aqui.</small>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" aria-hidden="false">
+    <a href="#inscricao">Quero me inscrever agora</a>
+  </div>
+
+  <!-- 🎧 MINI PODCAST PLAYER (FACISA) -->
+  <div class="pod-player" id="podPlayer" aria-label="Podcast FACISA" role="region">
+    <button class="pod-btn" id="podPlay" type="button" aria-label="Play/Pause">▶</button>
+
+    <div class="pod-mid">
+      <div class="pod-title">Podcast Vestibular Facisa</div>
+
+      <div class="pod-progress">
+        <span class="pod-time" id="podCur">0:00</span>
+        <input class="pod-range" id="podSeek" type="range" min="0" max="1000" value="0" aria-label="Progresso do áudio">
+        <span class="pod-time" id="podDur">0:00</span>
+      </div>
+    </div>
+
+    <button class="pod-btn" id="podMute" type="button" aria-label="Mudo">🔊</button>
+    <input class="pod-vol" id="podVol" type="range" min="0" max="1" step="0.01" value="0.5" aria-label="Volume">
+
+    <button class="pod-x" id="podClose" type="button" aria-label="Fechar player">×</button>
+
+    <audio id="podAudio" preload="metadata">
+      <source src="./podcast-facisa.mp3" type="audio/mpeg">
+      Seu navegador não suporta áudio.
+    </audio>
+  </div>
+
+  <!-- ✅ MODAL LEAD -->
+  <div id="leadModalOverlay" class="lead-overlay" aria-hidden="true">
+    <div class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+      <button class="lead-close" type="button" aria-label="Fechar" id="leadCloseBtn">×</button>
+
+      <h3 id="leadTitle" class="lead-title">Pré-cadastro rápido</h3>
+      <p class="lead-sub">Preencha para continuar sua inscrição no curso escolhido.</p>
+
+      <form id="leadForm" class="lead-form" autocomplete="on">
+        <label class="lead-label" for="leadName">Nome</label>
+        <input id="leadName" name="name" class="lead-input" type="text" placeholder="Seu nome completo" required />
+
+        <label class="lead-label" for="leadPhone">Telefone (WhatsApp)</label>
+        <input id="leadPhone" name="phone" class="lead-input" type="tel" inputmode="tel" placeholder="(73) 9xxxx-xxxx" required />
+
+        <label class="lead-label" for="leadEmail">Email</label>
+        <input id="leadEmail" name="email" class="lead-input" type="email" inputmode="email" placeholder="seuemail@exemplo.com" required />
+
+        <input id="leadCourseName" type="hidden" name="course_name" value="" />
+        <input id="leadRedirectUrl" type="hidden" name="redirect_url" value="" />
+
+        <button class="lead-submit" type="submit" id="leadSubmitBtn">Enviar e continuar</button>
+        <small class="lead-note">Ao enviar, você concorda em ser contatado(a) pela FACISA.</small>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Fade in/out ao rolar
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('visible'); }
+        else{ e.target.classList.remove('visible'); }
+      })
+    }, {threshold: 0.15});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    // ==============================
+    // 🖼️ HERO SLIDER (auto + dots)
+    // ==============================
+    const heroTrack = document.getElementById('heroTrack');
+    const heroSlides = Array.from(heroTrack.querySelectorAll('.hero-slide'));
+    const heroDotsWrap = document.getElementById('heroDots');
+    const heroProg = document.getElementById('heroProg');
+
+    let heroIndex = 0;
+    let heroTimer = null;
+    let heroPauseUntil = 0;
+
+    function heroStepWidth(){
+      const slide = heroSlides[0];
+      return slide ? slide.getBoundingClientRect().width : heroTrack.clientWidth;
+    }
+
+    function setActiveDot(i){
+      const dots = heroDotsWrap.querySelectorAll('.hero-dot');
+      dots.forEach((d, idx)=> d.classList.toggle('is-active', idx === i));
+    }
+
+    function goHero(i, behavior='smooth'){
+      const total = heroSlides.length || 1;
+      heroIndex = (i + total) % total;
+      heroTrack.scrollTo({ left: heroIndex * heroStepWidth(), behavior });
+      setActiveDot(heroIndex);
+
+      // reinicia progress bar (reflow)
+      if(heroProg){
+        heroProg.classList.remove('is-anim');
+        void heroProg.offsetWidth; // reflow
+        heroProg.classList.add('is-anim');
+      }
+    }
+
+    function scrollHero(dir){
+      // interação do usuário -> pausa temporária
+      heroPause(7000);
+      goHero(heroIndex + dir);
+    }
+
+    function buildHeroDots(){
+      heroDotsWrap.innerHTML = '';
+      heroSlides.forEach((_, i)=>{
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'hero-dot' + (i===0 ? ' is-active' : '');
+        b.setAttribute('aria-label', `Ir para banner ${i+1}`);
+        b.addEventListener('click', ()=>{
+          heroPause(7000);
+          goHero(i);
+        });
+        heroDotsWrap.appendChild(b);
+      });
+    }
+
+    function heroPause(ms){
+      heroPauseUntil = Date.now() + ms;
+    }
+
+    function startHeroAuto(){
+      stopHeroAuto();
+      heroTimer = setInterval(()=>{
+        if(Date.now() < heroPauseUntil) return;
+        goHero(heroIndex + 1);
+      }, 3000);
+    }
+
+    function stopHeroAuto(){
+      if(heroTimer) clearInterval(heroTimer);
+      heroTimer = null;
+    }
+
+    // drag no hero
+    let hStartX = 0, hScrollLeft = 0, hDown = false;
+    heroTrack.addEventListener('pointerdown', (e)=>{
+      hDown=true; hStartX=e.pageX; hScrollLeft=heroTrack.scrollLeft;
+      heroTrack.setPointerCapture(e.pointerId);
+      heroPause(7000);
+    });
+    heroTrack.addEventListener('pointermove', (e)=>{
+      if(!hDown) return;
+      const dx = e.pageX - hStartX;
+      heroTrack.scrollLeft = hScrollLeft - dx;
+    });
+    ['pointerup','pointercancel','pointerleave'].forEach(evt=>heroTrack.addEventListener(evt, ()=>{
+      if(!hDown) return;
+      hDown=false;
+
+      // snap pro slide mais próximo
+      const w = heroStepWidth() || 1;
+      const nearest = Math.round(heroTrack.scrollLeft / w);
+      goHero(nearest);
+    }));
+
+    // quando redimensiona, mantém índice certo
+    window.addEventListener('resize', ()=>{ goHero(heroIndex, 'auto'); });
+
+    buildHeroDots();
+    goHero(0, 'auto');
+    startHeroAuto();
+
+    // ---- Carrossel dos cursos ----
+    const carousel = document.getElementById('carousel');
+    function scrollCourses(dir){
+      const card = carousel.querySelector('.course');
+      const step = card ? card.getBoundingClientRect().width + 12 : 260;
+      carousel.scrollBy({left: dir * step, behavior:'smooth'});
+    }
+    let startX = 0, scrollLeft = 0, isDown = false;
+    carousel.addEventListener('pointerdown', (e)=>{ isDown=true; startX=e.pageX; scrollLeft=carousel.scrollLeft; carousel.setPointerCapture(e.pointerId); });
+    carousel.addEventListener('pointermove', (e)=>{ if(!isDown) return; const dx = e.pageX - startX; carousel.scrollLeft = scrollLeft - dx; });
+    ['pointerup','pointercancel','pointerleave'].forEach(evt=>carousel.addEventListener(evt, ()=>{ isDown=false; }));
+
+    carousel.tabIndex = 0;
+    carousel.addEventListener('keydown', (e)=>{
+      if(e.key==='ArrowRight') scrollCourses(1);
+      if(e.key==='ArrowLeft') scrollCourses(-1);
+    });
+
+    // ==============================
+    // MODAL LEAD + Advanced Matching
+    // ==============================
+    function normalizeEmail(email){ return (email || "").trim().toLowerCase(); }
+    function normalizePhoneBR(phone){
+      let digits = (phone || "").replace(/\D+/g,'');
+      if(digits.length === 10 || digits.length === 11) digits = "55" + digits;
+      return digits;
+    }
+    function splitName(full){
+      const parts = (full || "").trim().split(/\s+/).filter(Boolean);
+      return { fn: parts[0] || "", ln: parts.length > 1 ? parts[parts.length - 1] : "" };
+    }
+
+    const leadOverlay   = document.getElementById("leadModalOverlay");
+    const leadCloseBtn  = document.getElementById("leadCloseBtn");
+    const leadForm      = document.getElementById("leadForm");
+    const leadName      = document.getElementById("leadName");
+    const leadPhone     = document.getElementById("leadPhone");
+    const leadEmail     = document.getElementById("leadEmail");
+    const leadCourse    = document.getElementById("leadCourseName");
+    const leadRedirect  = document.getElementById("leadRedirectUrl");
+    const leadSubmitBtn = document.getElementById("leadSubmitBtn");
+
+    function openLeadModal({ courseName = "", redirectUrl = "" }){
+      leadCourse.value = courseName;
+      leadRedirect.value = redirectUrl;
+
+      leadOverlay.classList.add("show");
+      leadOverlay.setAttribute("aria-hidden","false");
+
+      setTimeout(()=> leadName.focus({ preventScroll:true }), 50);
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLeadModal(){
+      leadOverlay.classList.remove("show");
+      leadOverlay.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+      leadSubmitBtn.disabled = false;
+      leadSubmitBtn.textContent = "Enviar e continuar";
+    }
+
+    leadCloseBtn.addEventListener("click", closeLeadModal);
+    leadOverlay.addEventListener("click", (e)=>{ if(e.target === leadOverlay) closeLeadModal(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape" && leadOverlay.classList.contains("show")) closeLeadModal(); });
+
+    document.querySelectorAll(".course").forEach((a)=>{
+      a.addEventListener("click", (e)=>{
+        e.preventDefault();
+
+        const href = a.getAttribute("href") || "";
+        const titleEl = a.querySelector(".title");
+        const courseName = titleEl ? titleEl.textContent.trim() : "Curso";
+
+        openLeadModal({ courseName, redirectUrl: href });
+      });
+    });
+
+    leadForm.addEventListener("submit", (e)=>{
+      e.preventDefault();
+
+      leadSubmitBtn.disabled = true;
+      leadSubmitBtn.textContent = "Enviando...";
+
+      const name  = (leadName.value || "").trim();
+      const email = normalizeEmail(leadEmail.value);
+      const phone = normalizePhoneBR(leadPhone.value);
+      const { fn, ln } = splitName(name);
+
+      const url = (leadRedirect.value || "").trim();
+      const eventId = "lead_" + Date.now() + "_" + Math.random().toString(16).slice(2);
+      const LEAD_KEY = "facisa_px_lead_v1";
+
+      try{
+        if(typeof fbq === "function"){
+          fbq('init', '731985879919035', {
+            em: email || undefined,
+            ph: phone || undefined,
+            fn: fn || undefined,
+            ln: ln || undefined
+          });
+
+          const gate = window.__facisaPxGate;
+          const canFireLead = gate?.canFire ? gate.canFire(LEAD_KEY) : true;
+
+          if(canFireLead){
+            fbq('track', 'Lead', {
+              content_name: leadCourse.value || "Vestibular FACISA 2026",
+              source: "LP Vestibular 2026"
+            }, { eventID: eventId });
+
+            gate?.mark && gate.mark(LEAD_KEY);
+          }
+        }
+      }catch(err){
+        console.warn("Pixel/Lead não disparou:", err);
+      }
+
+      const WAIT_MS = 800;
+
+      setTimeout(()=>{
+        closeLeadModal();
+
+        if(url){
+          window.open(url, "_blank", "noopener");
+        }else{
+          leadSubmitBtn.disabled = false;
+          leadSubmitBtn.textContent = "Enviar e continuar";
+          alert("Link do curso não encontrado. Verifique o href do card.");
+        }
+      }, WAIT_MS);
+    });
+
+    // ==============================
+    // 🎧 MINI PODCAST PLAYER (FACISA)
+    // ==============================
+    (function initPodcastPlayer(){
+      const wrap  = document.getElementById("podPlayer");
+      if(!wrap) return;
+
+      const audio = document.getElementById("podAudio");
+      const btnPlay = document.getElementById("podPlay");
+      const btnMute = document.getElementById("podMute");
+      const btnClose = document.getElementById("podClose");
+      const seek = document.getElementById("podSeek");
+      const vol  = document.getElementById("podVol");
+      const cur  = document.getElementById("podCur");
+      const dur  = document.getElementById("podDur");
+
+      function fmtTime(s){
+        if(!Number.isFinite(s) || s <= 0) return "0:00";
+        const m = Math.floor(s/60);
+        const r = Math.floor(s%60);
+        return `${m}:${String(r).padStart(2,"0")}`;
+      }
+      function setPlayUI(isPlaying){
+        btnPlay.textContent = isPlaying ? "⏸" : "▶";
+      }
+
+      const STATE = { shouldUnmuteOnUserGesture: true };
+
+      try{
+        const savedVol = localStorage.getItem("facisa_pod_vol");
+        const savedMuted = localStorage.getItem("facisa_pod_muted");
+        const savedHidden = localStorage.getItem("facisa_pod_hidden");
+
+        if(savedHidden === "1"){
+          wrap.classList.add("is-hidden");
+        }
+
+        if(savedVol !== null){
+          vol.value = String(Math.min(1, Math.max(0, parseFloat(savedVol))));
+          audio.volume = parseFloat(vol.value);
+          if(!Number.isFinite(audio.volume)) audio.volume = 0.5;
+        } else {
+          audio.volume = 0.5;
+          vol.value = "0.5";
+          try{ localStorage.setItem("facisa_pod_vol","0.5"); }catch(e){}
+        }
+
+        if(savedMuted === "1"){
+          audio.muted = true;
+          btnMute.textContent = "🔇";
+          STATE.shouldUnmuteOnUserGesture = false;
+        } else {
+          audio.muted = false;
+          btnMute.textContent = "🔊";
+          STATE.shouldUnmuteOnUserGesture = true;
+        }
+      }catch(e){
+        audio.volume = 0.5;
+        vol.value = "0.5";
+        audio.muted = false;
+        btnMute.textContent = "🔊";
+        STATE.shouldUnmuteOnUserGesture = true;
+      }
+
+      audio.addEventListener("loadedmetadata", ()=>{
+        dur.textContent = fmtTime(audio.duration);
+      });
+
+      audio.addEventListener("timeupdate", ()=>{
+        if(!audio.duration) return;
+        cur.textContent = fmtTime(audio.currentTime);
+        dur.textContent = fmtTime(audio.duration);
+        const v = Math.round((audio.currentTime / audio.duration) * 1000);
+        seek.value = String(isFinite(v) ? v : 0);
+      });
+
+      btnPlay.addEventListener("click", async ()=>{
+        try{
+          if(audio.paused){
+            await audio.play();
+            setPlayUI(true);
+          }else{
+            audio.pause();
+            setPlayUI(false);
+          }
+        }catch(err){
+          console.warn("Não foi possível dar play:", err);
+        }
+      });
+
+      audio.addEventListener("play", ()=> setPlayUI(true));
+      audio.addEventListener("pause", ()=> setPlayUI(false));
+      audio.addEventListener("ended", ()=> setPlayUI(false));
+
+      seek.addEventListener("input", ()=>{
+        if(!audio.duration) return;
+        const t = (parseInt(seek.value,10) / 1000) * audio.duration;
+        audio.currentTime = Math.max(0, Math.min(audio.duration, t));
+      });
+
+      vol.addEventListener("input", ()=>{
+        audio.volume = parseFloat(vol.value);
+        if(!Number.isFinite(audio.volume)) audio.volume = 0.5;
+        try{ localStorage.setItem("facisa_pod_vol", String(audio.volume)); }catch(e){}
+        if(audio.muted && audio.volume > 0){
+          audio.muted = false;
+          btnMute.textContent = "🔊";
+          try{ localStorage.setItem("facisa_pod_muted","0"); }catch(e){}
+          STATE.shouldUnmuteOnUserGesture = true;
+        }
+      });
+
+      btnMute.addEventListener("click", ()=>{
+        audio.muted = !audio.muted;
+        btnMute.textContent = audio.muted ? "🔇" : "🔊";
+        try{ localStorage.setItem("facisa_pod_muted", audio.muted ? "1" : "0"); }catch(e){}
+        STATE.shouldUnmuteOnUserGesture = !audio.muted;
+      });
+
+      btnClose.addEventListener("click", ()=>{
+        audio.pause();
+        wrap.classList.add("is-hidden");
+        try{ localStorage.setItem("facisa_pod_hidden","1"); }catch(e){}
+      });
+
+      window.addEventListener("keydown", (e)=>{
+        if((e.ctrlKey || e.metaKey) && (e.key || "").toLowerCase() === "p"){
+          e.preventDefault();
+          wrap.classList.toggle("is-hidden");
+          try{ localStorage.setItem("facisa_pod_hidden", wrap.classList.contains("is-hidden") ? "1" : "0"); }catch(err){}
+        }
+      });
+
+      window.__facisaUnlockAudio = async function(){
+        try{
+          if(wrap.classList.contains("is-hidden")) return;
+          audio.volume = 0.5;
+          vol.value = "0.5";
+          try{ localStorage.setItem("facisa_pod_vol","0.5"); }catch(e){}
+          audio.muted = false;
+          btnMute.textContent = "🔊";
+          try{ localStorage.setItem("facisa_pod_muted","0"); }catch(e){}
+          STATE.shouldUnmuteOnUserGesture = true;
+          await audio.play();
+        }catch(err){
+          console.warn("Unlock áudio falhou:", err);
+        }
+      };
+
+      async function tryAutoplayMuted(){
+        try{
+          if(wrap.classList.contains("is-hidden")) return;
+          audio.volume = 0.5;
+          vol.value = "0.5";
+          audio.muted = true;
+          btnMute.textContent = "🔇";
+          const p = audio.play();
+          if(p && typeof p.then === "function"){ await p; }
+          setPlayUI(true);
+        }catch(e){}
+      }
+      window.addEventListener("load", ()=>{ tryAutoplayMuted(); }, { once:true });
+
+      (function unlockOnFirstGesture(){
+        let done = false;
+        async function onGesture(){
+          if(done) return;
+          done = true;
+          if(STATE.shouldUnmuteOnUserGesture){
+            await window.__facisaUnlockAudio();
+          }
+          window.removeEventListener("click", onGesture);
+          window.removeEventListener("touchstart", onGesture);
+          window.removeEventListener("pointerdown", onGesture);
+          window.removeEventListener("scroll", onGesture);
+        }
+        window.addEventListener("click", onGesture, { once:true, passive:true });
+        window.addEventListener("touchstart", onGesture, { once:true, passive:true });
+        window.addEventListener("pointerdown", onGesture, { once:true, passive:true });
+        window.addEventListener("scroll", onGesture, { once:true, passive:true });
+      })();
+    })();
+  </script>
+
+  <!-- AVISO DE COOKIES -->
+  <div id="cookieOverlay" class="cookie-overlay" aria-hidden="true">
+    <div id="cookieBanner" class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookieTitle">
+      <h3 id="cookieTitle">Usamos cookies 🍪</h3>
+      <p class="cookie-desc">
+        Eles ajudam a melhorar sua experiência e entender como você usa a LP.
+      </p>
+      <div class="cookie-actions">
+        <button id="acceptCookies" class="cookie-btn">Aceitar e continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+    const overlay = document.getElementById("cookieOverlay");
+    const btn     = document.getElementById("acceptCookies");
+
+    if(!localStorage.getItem("cookiesAccepted")){
+      setTimeout(()=>{
+        overlay.classList.add("show");
+        overlay.setAttribute("aria-hidden","false");
+        btn.focus({ preventScroll:true });
+      }, 600);
+    }
+
+    async function acceptCookies(){
+      localStorage.setItem("cookiesAccepted","true");
+      overlay.classList.remove("show");
+      overlay.setAttribute("aria-hidden","true");
+
+      if(typeof window.__facisaUnlockAudio === "function"){
+        await window.__facisaUnlockAudio();
+      }
+    }
+    btn.addEventListener("click", acceptCookies);
+
+    window.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape" && overlay.classList.contains("show")){
+        acceptCookies();
+      }
+    });
+
+    overlay.addEventListener("click", (e)=>{
+      if(e.target === overlay){ acceptCookies(); }
+    });
+  });
+  </script>
+
+</body>
+</html>
